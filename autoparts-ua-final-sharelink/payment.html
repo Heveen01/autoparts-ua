@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Оплата замовлення | Autoparts‑UA</title>
+<link rel="stylesheet" href="css/style.css">
+  <script defer src="js/common-lang.js"></script>
+</head>
+<body>
+
+<header class="header-bar">
+  <div class="header-topline">
+    <div class="brand-col">
+      <div class="brand-name">Autoparts‑UA</div>
+      <div class="brand-desc">Оплата замовлення · Захищений перехід до платіжного сервісу</div>
+    </div>
+<div class="ukraine-banner" style="margin-left:16px;display:flex;align-items:center;gap:10px;">
+  <img src="img/ukraine-flag.png" alt="Ukraine" style="width:36px;height:24px;border-radius:3px;">
+  <div style="font-weight:700;color:#fff;font-size:14px;">Stand with Ukraine</div>
+</div>
+
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Каталог</a>
+    <a href="delivery.html">Доставка і оплата</a>
+    <a href="warranty.html">Гарантія та повернення</a>
+    <a href="contact.html">Контакти</a>
+  </nav>
+</header>
+
+<main class="main-wrap">
+  <div class="layout" style="grid-template-columns:1fr;max-width:900px;">
+
+    <section class="sidebar" style="background:#fff;">
+      <div class="sb-title">Перевірка замовлення</div>
+      <div id="cartSummary" style="margin-bottom:12px;"></div>
+
+      <div class="sb-title">Ваші дані</div>
+
+      <form id="payForm">
+        <div class="row-field">
+          <label>Ваше ім'я та прізвище (одержувач)</label>
+          <input id="fullname" type="text" name="fullname" placeholder="Ім'я Прізвище" required style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+        </div>
+
+        <div class="row-field">
+          <label>Телефон (Viber / WhatsApp)</label>
+          <input id="phone" type="tel" name="phone" placeholder="+380 ..." required style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+        </div>
+
+        <div class="row-field">
+          <label>Адреса доставки (місто / країна / відділення)</label>
+          <input id="address" type="text" name="address" placeholder="м. Львів НП №5 / Wien AT / Praha CZ" required style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+        </div>
+
+        <div class="row-field">
+          <label>VIN / Коментар (яка деталь потрібна)</label>
+          <textarea id="message" name="message" rows="3" placeholder="VIN, диск BREMBO 09.7011.10" style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;"></textarea>
+        </div>
+
+        <div class="sb-title" style="margin-top:12px;">Спосіб оплати</div>
+
+        <div style="margin-bottom:8px;">
+          <input type="radio" id="pay_cod" name="paymethod" value="cod" checked>
+          <label for="pay_cod">Оплата при отриманні (Україна — Нова Пошта)</label>
+        </div>
+
+        <div style="margin-bottom:8px;">
+          <input type="radio" id="pay_card" name="paymethod" value="card">
+          <label for="pay_card">Оплата карткою / PayPal (ЄС і міжнародна оплата)</label>
+        </div>
+
+        
+        <div class="sb-title" style="margin-top:12px;">Дані картки (візуальний інтерфейс)</div>
+        <div style="font-size:12px;color:#475569;margin-bottom:8px;">
+          Нижче — візуальне поле для зручності. Ми НЕ зберігаємо чи не відправляємо ці дані на наш сервер. 
+          Після натискання «Продовжити до оплати» ви будете спрямовані на захищений платіжний сервіс для введення картки.
+        </div>
+        <div class="row-field">
+          <label>Ім'я на картці</label>
+          <input id="card_name" type="text" maxlength="64" placeholder="IVAN IVANOV" style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:160px;">
+            <label>Номер картки</label>
+            <input id="card_number" type="text" maxlength="19" placeholder="1234 5678 9012 3456" style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+          </div>
+          <div style="width:120px;">
+            <label>Термін (MM/YY)</label>
+            <input id="card_exp" type="text" maxlength="5" placeholder="12/25" style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+          </div>
+          <div style="width:100px;">
+            <label>CVV</label>
+            <input id="card_cvv" type="text" maxlength="4" placeholder="123" style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+          </div>
+        </div>
+        <div style="font-size:11px;color:#9ca3af;margin-top:8px;">
+          <strong>УВАГА:</strong> НЕ вводьте реальні дані картки, якщо не впевнені в захищеності сторінки. Ці поля є лише для візуального демо і НЕ будуть збережені на сервері в поточній конфігурації.
+        </div>
+
+        <div style="margin-top:12px;">
+          <button id="continueBtn" class="checkout-btn" type="button">Продовжити</button>
+        </div>
+
+        <div id="resp-ok" class="alert-success">Готово.</div>
+        <div id="resp-err" class="alert-error">Помилка.</div>
+      </form>
+
+      <div style="margin-top:12px;font-size:13px;color:#475569;">
+        ⚠️ Увага: при виборі «Оплата карткою / PayPal» ви будете переадресовані на захищений платіжний шлюз (PayPal/Stripe/Fondy). Наш сайт не збирає та не зберігає дані вашої картки.
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer-bar">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-title">Autoparts‑UA</div>
+      <div class="smallnote">© 2025 Autoparts‑UA</div>
+    </div>
+    <div class="footer-col footer-links">
+      <div class="footer-title">Посилання</div>
+      <a href="index.html">Каталог</a>
+      <a href="delivery.html">Доставка і оплата</a>
+      <a href="contact.html">Контакти</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script>
+// show cart summary and handle continue button (redirect to external payment or submit as COD)
+function eurToUah(eur){ return (eur*window.EUR_TO_UAH).toFixed(2); }
+function renderCartSummary(){
+  const cart = JSON.parse(localStorage.getItem('AUTOPARTS_CART')||'[]');
+  if(!cart.length){
+    document.getElementById('cartSummary').innerHTML = '<div class="note">Кошик порожній — додайте товар на головній сторінці.</div>';
+    document.getElementById('continueBtn').disabled = true;
+    return;
+  }
+  document.getElementById('continueBtn').disabled = false;
+  let totalEur = 0;
+  let html = '<div><strong>Вміст кошика:</strong></div><ul style="margin-top:6px;padding-left:18px;">';
+  cart.forEach(it=>{
+    totalEur += Number(it.price || 0);
+    html += `<li>${it.brand} ${it.article} — ${it.title} — ${it.price.toFixed(2)} € (~${eurToUah(it.price)} грн)</li>`;
+  });
+  html += '</ul>';
+  html += `<div style="margin-top:8px;font-weight:700;">Разом: ${totalEur.toFixed(2)} € (~${(totalEur*window.EUR_TO_UAH).toFixed(2)} грн)</div>`;
+  document.getElementById('cartSummary').innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderCartSummary();
+  document.getElementById('continueBtn').addEventListener('click', async ()=>{
+    const payMethod = document.querySelector('input[name="paymethod"]:checked').value;
+    const fullname = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if(!fullname || !phone || !address){
+      alert('Будь ласка, заповніть ім'я, телефон та адресу доставки.');
+      return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem('AUTOPARTS_CART')||'[]');
+    // send order details to backend for record (mail + DB) — backend endpoint backend/send.php exists
+    try{
+      const fd = new FormData();
+      fd.append('name', fullname);
+      fd.append('phone', phone);
+      fd.append('np', address);
+      fd.append('message', message);
+      fd.append('cart_json', JSON.stringify(cart));
+      // mark payment method
+      fd.append('paymethod', payMethod);
+
+      // send to backend for saving / email
+      await fetch('backend/send.php', { method:'POST', body: fd });
+
+    }catch(e){
+      console.warn('Could not send order to backend', e);
+    }
+
+    if(payMethod === 'cod'){
+      // COD — show thank you page
+      localStorage.removeItem('AUTOPARTS_CART');
+      window.location.href = 'thankyou.html';
+    } else {
+      // redirect to external payment provider (placeholder PayPal)
+      // In production replace the URL with your payment provider checkout link (Stripe/Fondy/LiqPay)
+      // We include a short demo: open PayPal and prefill nothing (user will input card)
+      // For better UX integrate provider SDK / server-side create payment session.
+      window.location.href = 'https://www.paypal.com/';
+    }
+  });
+});
+</script>
+</body>
+</html>

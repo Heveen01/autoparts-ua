@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Autoparts‑UA | Інтернет‑магазин автозапчастин</title>
+<meta name="description" content="Опора стійки, гальмівні диски, колодки, фільтри, олива. Доставка по всій Європі. Оплата після огляду в Україні.">
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+.cart-itemline{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:6px;
+}
+.cart-itemtext{
+  font-size:13px;
+  line-height:1.4;
+  word-break:break-word;
+}
+.cart-del{
+  background:#fff0f0;
+  border:1px solid #cc0000;
+  color:#cc0000;
+  border-radius:4px;
+  font-size:12px;
+  line-height:1;
+  padding:2px 6px;
+  cursor:pointer;
+}
+.cart-del:hover{
+  background:#cc0000;
+  color:#fff;
+}
+</style>
+
+
+<style>
+.cod-note{
+  font-size:12px;
+  color:#475569;
+  margin-top:4px;
+  line-height:1.4;
+}
+</style>
+
+  <script defer src="js/common-lang.js"></script>
+</head>
+<body>
+
+<header class="header-bar">
+  <div class="header-topline">
+    <div class="brand-col">
+      <div class="brand-name">Autoparts‑UA</div>
+      <div class="brand-desc">Ми гарантуємо безпеку та якість • Доставка по всій Європі 🇪🇺</div>
+    </div>
+<div class="ukraine-banner" style="margin-left:16px;display:flex;align-items:center;gap:10px;">
+  <img src="img/ukraine-flag.png" alt="Ukraine" style="width:36px;height:24px;border-radius:3px;">
+  <div style="font-weight:700;color:#fff;font-size:14px;">Stand with Ukraine</div>
+</div>
+
+    <div class="search-col">
+      <div class="search-head">Підібрати запчастину за авто</div>
+      <div class="filters-row">
+        <select id="carBrandSelect"></select>
+
+<select id="carModelSelect"></select>
+        <select>
+          <option>2.3 V5 бензин</option>
+          <option>1.9 TDI дизель</option>
+          <option>1.6 бензин</option>
+          <option>1.8T бензин</option>
+        </select>
+        <select>
+          <option>1996-2010</option>
+          <option>1997-2004</option>
+          <option>1999-2005</option>
+          <option>2000-2005</option>
+        </select>
+        <button>Показати</button>
+      </div>
+      <div class="vin-hint">Надішліть нам VIN (17 символів) — ми перевіримо сумісність перед відправкою 📦</div>
+    </div>
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Каталог</a>
+    <a href="delivery.html">Доставка і оплата</a>
+    <a href="warranty.html">Гарантія та повернення</a>
+    <a href="contact.html">Контакти</a>
+  </nav>
+</header>
+
+<main class="main-wrap">
+
+  <div class="layout">
+
+    <aside class="sidebar">
+
+      
+      <div class="sidebar-block">
+        <div class="sb-title">Категорія</div>
+        <button class="cat-btn active" data-cat="suspension">Підвіска / рульове / амортизатори</button>
+        <button class="cat-btn" data-cat="brake">Гальмівні диски та колодки</button>
+        <button class="cat-btn" data-cat="oilfilter">Двигун / фільтри / ремінь ГРМ</button>
+        <button class="cat-btn" data-cat="electrics">Електрика / датчики ABS</button>
+      </div>
+
+
+      <div class="sidebar-block">
+        <div class="sb-title">
+          Валюта <span class="sb-small">(показ ціни)</span>
+        </div>
+        <div class="row-inline">
+          <input type="checkbox" id="uahToggle">
+          <label for="uahToggle">грн замість €</label>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sb-title">Сортування та наявність</div>
+        <div class="row-field">
+          <label for="sortBy">Сортувати за</label>
+          <select id="sortBy">
+  <option value="priceDesc">Ціна ↓</option>
+  <option value="priceAsc">Ціна ↑</option>
+</select>
+        </div>
+
+        <div class="row-inline">
+          <input type="checkbox" id="stockOnly">
+          <label for="stockOnly">лише в наявності</label>
+        </div>
+
+        <div class="note">* знижка рахується від старої ціни</div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sb-title">Кошик</div>
+        <div class="cart-box">
+          <div class="cart-title">Ваш кошик</div>
+          <div class="cart-items"></div>
+          <div class="cart-sum"></div>
+          <a class="checkout-btn" href="checkout.html">Оформити замовлення</a>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="sb-title">Доставка</div>
+        <div class="note">Україна — Нова Пошта (оплата після огляду).</div>
+        <div class="note" style="margin-top:6px;">ЄС — кур'єр по всій Європі 🇪🇺 (передплата або PayPal).</div>
+      </div>
+
+    </aside>
+
+    <section>
+
+      <div class="catalog-head">
+        <div class="catalog-head-block">
+          <label>Поточний розділ</label>
+          <div id="currentCatLabel">Підвіска / Шарова / Сайлентблок</div>
+        </div>
+        <div class="catalog-head-block">
+          <label>Як ми працюємо</label>
+          <div>Ти додаєш деталь у кошик → залишаєш VIN і телефон → ми перевіряємо сумісність → відправка по Україні або по всій Європі 🇪🇺.</div>
+        </div>
+        <div class="catalog-head-block">
+          <label>Перевірка сумісності</label>
+          <div>Перед відправкою ми звіряємо OEM-код і VIN. Якщо не підходить — не шлемо, ти не платиш за помилку.</div>
+        </div>
+      </div>
+
+      <div class="product-list">
+        <!-- JS вставить строки товарів -->
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="footer-bar">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-title">Autoparts‑UA</div>
+      <div class="smallnote">© 2025 Autoparts‑UA. Усі права захищено.</div>
+      <div class="smallnote">Доставка по Україні та по всій Європі 🇪🇺</div>
+    </div>
+    <div class="footer-col footer-links">
+      <div class="footer-title">Інфо</div>
+      <a href="delivery.html">Доставка і оплата</a>
+      <a href="warranty.html">Гарантія та повернення</a>
+      <a href="contact.html">Контакти</a>
+    </div>
+    <div class="footer-col footer-links">
+      <div class="footer-title">Графік</div>
+      <div>Пн-Нд: 08:00 - 23:00</div>
+      <div>Вся Україна · ЄС 🇪🇺</div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
