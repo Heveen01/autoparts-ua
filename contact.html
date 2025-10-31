@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Контакти | Autoparts‑UA</title>
+<link rel="stylesheet" href="css/style.css">
+  <script defer src="js/common-lang.js"></script>
+</head>
+<body>
+
+<header class="header-bar">
+  <div class="header-topline">
+    <div class="brand-col">
+      <div class="brand-name">Autoparts‑UA</div>
+      <div class="brand-desc">Замовлення та консультації · Україна / Європа 🇪🇺</div>
+    </div>
+<div class="ukraine-banner" style="margin-left:16px;display:flex;align-items:center;gap:10px;">
+  <img src="img/ukraine-flag.png" alt="Ukraine" style="width:36px;height:24px;border-radius:3px;">
+  <div style="font-weight:700;color:#fff;font-size:14px;">Stand with Ukraine</div>
+</div>
+
+  </div>
+  <nav class="navbar">
+    <a href="index.html">Каталог</a>
+    <a href="delivery.html">Доставка і оплата</a>
+    <a href="warranty.html">Гарантія та повернення</a>
+    <a href="contact.html">Контакти</a>
+  </nav>
+</header>
+
+<main class="main-wrap">
+  <div class="layout" style="grid-template-columns:1fr;max-width:700px;">
+    <section class="sidebar" style="background:#fff;">
+      <div class="sb-title">Залишити запит</div>
+
+      <form id="orderForm">
+        <div class="row-field">
+          <label>Ваше ім'я</label>
+          <input type="text" name="name" placeholder="Ім'я" required style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+        </div>
+
+        <div class="row-field">
+          <label>Номер телефону (Viber/WhatsApp)</label>
+          <input type="tel" name="phone" placeholder="+380 ... або +43 ... або +48 ..." required style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+        </div>
+
+        <div class="row-field">
+          <label>Місто / Країна доставки</label>
+          <input type="text" name="np" placeholder="м. Львів НП №5 / Wien Austria / Praha CZ" required style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;">
+        </div>
+
+        <div class="row-field">
+          <label>VIN (17 символів) + яка деталь потрібна</label>
+          <textarea name="message" rows="4" placeholder="WVWZZZ1JZYW000000, диск гальмівний BREMBO 09.7011.10 + колодки TEXTAR 2355402" required style="padding:8px 10px;border-radius:4px;border:1px solid #cbd5e1;"></textarea>
+        </div>
+
+        <button type="submit" class="checkout-btn" style="margin-top:8px;">Відправити (зв'яжіться зі мною)</button>
+
+        <div id="resp-ok" class="alert-success">Готово.</div>
+        <div id="resp-err" class="alert-error">Помилка.</div>
+      </form>
+
+      <div class="note" style="margin-top:16px;">
+        Україна 🇺🇦 — оплата після огляду на Новій Пошті.<br>
+        Європа 🇪🇺 — курʼєр, оплата по домовленості (передплата / PayPal).
+      </div>
+    </section>
+
+    <section class="sidebar">
+      <div class="sb-title">Графік роботи</div>
+      <div class="note" style="font-size:13px;color:#1e293b;">
+        Пн - Нд: 08:00 - 23:00<br>
+        Україна та ЄС 🇪🇺
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer-bar">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-title">Autoparts‑UA</div>
+      <div class="smallnote">© 2025 Autoparts‑UA. Усі права захищено.</div>
+      <div class="smallnote">Доставка по Україні та по всій Європі 🇪🇺</div>
+    </div>
+    <div class="footer-col footer-links">
+      <div class="footer-title">Інфо</div>
+      <a href="delivery.html">Доставка і оплата</a>
+      <a href="warranty.html">Гарантія та повернення</a>
+      <a href="contact.html">Контакти</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Деталь | Autoparts‑UA</title>
+<link rel="stylesheet" href="../css/style.css">
+  <script defer src="js/common-lang.js"></script>
+</head>
+<body>
+<header class="header-bar">
+  <div class="header-topline">
+    <div class="brand-col">
+      <div class="brand-name">Autoparts‑UA</div>
+      <div class="brand-desc">Детальна інформація про товар</div>
+    </div>
+<div class="ukraine-banner" style="margin-left:16px;display:flex;align-items:center;gap:10px;">
+  <img src="img/ukraine-flag.png" alt="Ukraine" style="width:36px;height:24px;border-radius:3px;">
+  <div style="font-weight:700;color:#fff;font-size:14px;">Stand with Ukraine</div>
+</div>
+
+  </div>
+  <nav class="navbar">
+    <a href="../index.html">Каталог</a>
+    <a href="../delivery.html">Доставка і оплата</a>
+    <a href="../warranty.html">Гарантія та повернення</a>
+    <a href="../contact.html">Контакти</a>
+  </nav>
+</header>
+
+<main class="main-wrap">
+  <div class="layout" style="grid-template-columns:1fr;">
+    <section class="sidebar" style="background:#fff;">
+      <div id="prodDetail">
+        <!-- заповнюється JS product-page.js -->
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer-bar">
+  <div class="footer-inner">
+    <div class="footer-col">
+      <div class="footer-title">Autoparts‑UA</div>
+      <div class="smallnote">© 2025 Autoparts‑UA</div>
+    </div>
+    <div class="footer-col footer-links">
+      <div class="footer-title">Посилання</div>
+      <a href="../index.html">Каталог</a>
+      <a href="../delivery.html">Доставка і оплата</a>
+      <a href="../contact.html">Контакти</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script>
+// Simple standalone product renderer
+(function(){
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('id'); // brand|article
+  const box = document.getElementById('prodDetail');
+
+  if(!code || !box){
+    box.innerHTML = '<div class="note">Товар не знайдено</div>';
+    return;
+  }
+
+  const item = (window.PRODUCTS||[]).find(p=>(p.brand+'|'+p.article)===code);
+  const models = window.MODELS || [];
+  if(!item){
+    box.innerHTML = '<div class="note">Товар не знайдено</div>';
+    return;
+  }
+
+  const eur = item.price.toFixed(2)+' €';
+  const uah = (item.price*window.EUR_TO_UAH).toFixed(2)+' грн';
+  const paramList = (item.params||[]).map(x=>'<li>'+x+'</li>').join('');
+  const modelsList = (item.models||[]).map(m=>'<li>'+m+'</li>').join('');
+
+  box.innerHTML = `
+    <div class="sb-title">${item.brand} · ${item.article}</div>
+    <div class="note" style="font-size:13px;color:#1e293b;">${item.title}</div>
+    <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:16px;">
+      <div class="prod-img-wrap" style="flex:0 0 240px;max-width:240px;">
+        <img src="../img/${item.img}" alt="${item.brand} ${item.article}">
+      </div>
+      <div style="flex:1;min-width:200px;font-size:13px;line-height:1.4;">
+        <div style="font-weight:600;color:#1e293b;margin-bottom:4px;">Сумісність:</div>
+        <div style="margin-bottom:8px;">${item.compat}</div>
+        <div style="font-weight:600;color:#1e293b;margin-bottom:4px;">Моделі (швидкий перегляд):</div>
+        <ul style="margin-bottom:8px;">${modelsList}</ul>
+        <div style="font-size:12px;color:#64748b;margin-bottom:12px;">
+          OEM / OE: ${(item.oem||[]).join(', ')}
+        </div>
+        <div style="font-weight:600;color:#1e293b;margin-bottom:4px;">Характеристики:</div>
+        <ul style="font-size:13px;color:#1e293b;line-height:1.4;margin-bottom:12px;padding-left:18px;">
+          ${paramList}
+        </ul>
+
+        <div style="font-size:14px;font-weight:700;color:#1a1a1a;">Ціна: ${eur} (~${uah})</div>
+        <div style="margin-top:8px;font-size:12px;font-weight:600;color:#16a34a;background:#dcfce7;border:1px solid #86efac;border-radius:4px;padding:4px 6px;display:inline-block;">
+          ${item.stock ? "В наявності ✓ Готово до відправки сьогодні" : "Немає"}
+        </div>
+
+        <div style="margin-top:16px;">
+          <a class="add-btn" href="../contact.html" style="display:inline-block;width:auto;">Замовити / VIN перевірка</a>
+        </div>
+
+        <div style="margin-top:16px;font-size:12px;color:#475569;">
+          Доставка по всій Європі 🇪🇺  
+          (Нова пошта в Україну, кур'єр партнера в інші країни ЄС).
+        </div>
+      </div>
+    </div>
+  `;
+})();
+</script>
+</body>
+</html>

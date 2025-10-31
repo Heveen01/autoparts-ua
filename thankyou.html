@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Дякуємо | Autoparts‑UA</title>
+<link rel="stylesheet" href="css/style.css">
+  <script defer src="js/common-lang.js"></script>
+</head>
+<body>
+<header class="header-bar"><div class="header-topline"><div class="brand-col">
+<div class="ukraine-banner" style="margin-left:16px;display:flex;align-items:center;gap:10px;">
+  <img src="img/ukraine-flag.png" alt="Ukraine" style="width:36px;height:24px;border-radius:3px;">
+  <div style="font-weight:700;color:#fff;font-size:14px;">Stand with Ukraine</div>
+</div>
+<div class="brand-name">Autoparts‑UA</div></div></div></header>
+<main class="main-wrap"><div style="max-width:900px;margin:24px auto;padding:16px;background:#fff;border:1px solid #e2e8f0;border-radius:6px;">
+  <h2>Дякуємо! Ваше замовлення прийнято</h2>
+  <p>Ми отримали ваші дані і зв'яжемося з вами найближчим часом для підтвердження та опрацювання відправлення.</p>
+  <p>Якщо ви оплатили карткою, перевірте підтвердження платежу у платіжній системі.</p>
+  <a href="index.html" class="checkout-btn" style="display:inline-block;margin-top:12px;">Повернутися в каталог</a>
+</div></main>
+
+  <section class="cardbox" id="shareBlock" style="display:none; margin:1rem 0;">
+    <h2 class="block-title">Поділитися замовленням</h2>
+    <div class="smallnote">Надішліть посилання, щоб інша особа могла переглянути це замовлення:</div>
+    <div style="display:flex; gap:8px; margin-top:8px;">
+      <input type="text" id="shareLinkInput" readonly style="flex:1; padding:8px; border:1px solid #ccc; border-radius:6px;" />
+      <button id="copyShareBtn" class="btn">Копіювати</button>
+    </div>
+  </section>
+  <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    try{
+      const link = localStorage.getItem('AUTOPARTS_SHARE_LINK');
+      if(!link) return;
+      const block = document.getElementById('shareBlock');
+      const inp = document.getElementById('shareLinkInput');
+      const btn = document.getElementById('copyShareBtn');
+      if(!block||!inp||!btn) return;
+      inp.value = link;
+      block.style.display = 'block';
+      btn.addEventListener('click', function(){
+        inp.select();
+        document.execCommand('copy');
+        btn.textContent = 'Скопійовано';
+        setTimeout(()=>btn.textContent='Копіювати',1500);
+      });
+      // optionally remove stored link so it's single-use from this browser
+      // localStorage.removeItem('AUTOPARTS_SHARE_LINK');
+    }catch(e){console.error(e);}
+  });
+  </script>
+
+</body></html>
